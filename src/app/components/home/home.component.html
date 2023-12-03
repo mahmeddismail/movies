@@ -1,0 +1,811 @@
+<section (click)="getRequestedToken()">
+    <button class="py-5">CLICKK</button>
+</section>
+
+<section class="">
+    <div class="container-fluid">
+        <div class="row">
+
+            <owl-carousel-o [options]="MainOptions">
+                <ng-template carouselSlide *ngFor="let movies of myMovies" class="position-relative">
+
+                    <img src="https://image.tmdb.org/t/p/original/{{movies.backdrop_path}}" class="img-fluid"
+                        [alt]="movies.id" style="object-fit:cover;max-height: 100vh;">
+                    <div class="myBanner">
+                        <div class="carousel-caption text-center">
+                            <!-- <div *ngIf="myMovieIds?.includes($any(movies.id))"> -->
+                            <!-- <div *ngIf="movies.id" (click)="movieTrailer(movies.id)">
+                                <div class="d-flex justify-content-center align-items-center my-2 text-blue">
+                                    <a href="https://www.youtube.com/watch?v={{myMovieTrailer}}" target="_blank" class="btn btn-danger">
+                                        <span>Movie Trailer</span>
+                                    </a>
+                                </div>
+
+                            </div> -->
+                            <h1 class="fw-bold text-red">{{movies.original_title}}</h1>
+                            <h1 class="fw-bold text-red">{{movies.name}}</h1>
+                            <p class="my-2 text-white h5">{{movies.overview|seeMore:25}}....</p>
+                            <div *ngIf="myMovieIds?.includes($any(movies.id))">
+                                <div
+                                    class="d-flex justify-content-center align-items-center my-2 text-blue myRatedBanner">
+                                    <div>
+
+                                        <i class="fa-solid fa-star h3 "></i>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-end">
+                                        <span>
+                                            <span><span class="fw-bold h5 userRatingBanner">
+                                                    {{userRate[myMovieIds.indexOf(movies.id)]}}
+                                                </span><span class="h6 MaxNumRating">/10</span></span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-template>
+            </owl-carousel-o>
+
+
+        </div>
+    </div>
+</section>
+
+
+<section class="py-3">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-white fw-bold h5 trending">Trending Now:</h3>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let movies of myMovies">
+                    <ng-template carouselSlide>
+                        <div class="col-12 col-md-11 mb-4">
+
+                            <a
+                                [routerLink]="movies.media_type=='movie'?['/detailedMovie',movies.id]:['/detailedtv',movies.id]">
+
+                                <div class="bg-warning myCard" *ngIf="myMovies">
+                                    <img src="https://image.tmdb.org/t/p/w500/{{movies.poster_path}}"
+                                        alt="trendingMoviesIMG" class="img-fluid">
+
+
+                                    <div class="imgLayer d-flex flex-column justify-content-center">
+                                        <div class="m-2">
+                                            <div class="">
+                                                <h3 class="fw-bold text-center h5">{{movies.original_title}}</h3>
+                                                <h3 class="fw-bold text-center h5">{{movies.name}}</h3>
+                                            </div>
+
+                                            <div class="">
+                                                <div class="d-flex justify-content-center align-items-center my-2">
+                                                    <i class="fa-solid fa-star h3 text-warning"></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span
+                                                                class="fw-bold h5">{{movies.vote_average|number:'1.1-1'}}</span>
+                                                            <span class="h6">/10</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div *ngIf="myMovieIds?.includes($any(movies.id))">
+                                                <div
+                                                    class="d-flex justify-content-center align-items-center my-2 text-blue">
+                                                    <i class="fa-solid fa-star h3 "></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span><span class="fw-bold h5">
+                                                                    {{userRate[myMovieIds.indexOf(movies.id)]}}
+                                                                </span><span class="h6">/10</span></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-container>
+
+            </owl-carousel-o>
+        </div>
+    </div>
+</section>
+
+<section class="py-3">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-white fw-bold h5">Action Movies:</h3>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let action of actionM">
+                    <ng-template carouselSlide>
+                        <div class="col-12 col-md-11 mb-4">
+                            <a [routerLink]="['/detailedMovie',action.id]">
+
+                                <div class="bg-danger myCard" *ngIf="actionM">
+                                    <img src="https://image.tmdb.org/t/p/w500/{{action.poster_path}}"
+                                        alt="trendingactionIMG" class="img-fluid">
+
+
+                                    <div class="imgLayer d-flex flex-column justify-content-center">
+                                        <div class="m-2">
+                                            <div class="">
+                                                <h3 class="fw-bold text-center h5">{{action.original_title}}</h3>
+                                                <h3 class="fw-bold text-center h5">{{action.name}}</h3>
+                                            </div>
+
+                                            <div class="">
+                                                <div class="d-flex justify-content-center align-items-center my-2">
+                                                    <i class="fa-solid fa-star h3 text-warning"></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span
+                                                                class="fw-bold h5">{{action.vote_average|number:'1.1-1'}}</span>
+                                                            <span class="h6">/10</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div *ngIf="myMovieIds?.includes($any(action.id))">
+                                                <div
+                                                    class="d-flex justify-content-center align-items-center my-2 text-blue">
+                                                    <i class="fa-solid fa-star h3 "></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span><span class="fw-bold h5">
+                                                                    {{userRate[myMovieIds.indexOf(action.id)]}}
+                                                                </span><span class="h6">/10</span></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-container>
+
+            </owl-carousel-o>
+        </div>
+    </div>
+</section>
+<section class="py-3">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-white fw-bold h5">Animation:</h3>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let animation of animationM">
+                    <ng-template carouselSlide>
+                        <div class="col-12 col-md-11 mb-4">
+                            <a [routerLink]="['/detailedMovie',animation.id]">
+
+                                <div class="bg-danger myCard" *ngIf="animationM">
+                                    <img src="https://image.tmdb.org/t/p/w500/{{animation.poster_path}}"
+                                        alt="trendinganimationIMG" class="img-fluid">
+
+
+                                    <div class="imgLayer d-flex flex-column justify-content-center">
+                                        <div class="m-2">
+                                            <div class="">
+                                                <h3 class="fw-bold text-center h5">{{animation.original_title}}</h3>
+                                                <h3 class="fw-bold text-center h5">{{animation.name}}</h3>
+                                            </div>
+
+                                            <div class="">
+                                                <div class="d-flex justify-content-center align-items-center my-2">
+                                                    <i class="fa-solid fa-star h3 text-warning"></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span
+                                                                class="fw-bold h5">{{animation.vote_average|number:'1.1-1'}}</span>
+                                                            <span class="h6">/10</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div *ngIf="myMovieIds?.includes($any(animation.id))">
+                                                <div
+                                                    class="d-flex justify-content-center align-items-center my-2 text-blue">
+                                                    <i class="fa-solid fa-star h3 "></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span><span class="fw-bold h5">
+                                                                    {{userRate[myMovieIds.indexOf(animation.id)]}}
+                                                                </span><span class="h6">/10</span></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-container>
+
+            </owl-carousel-o>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-3">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-white fw-bold h5">Comedy Movies:</h3>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let comedy of comedyM">
+                    <ng-template carouselSlide>
+                        <div class="col-12 col-md-11 mb-4">
+                            <a [routerLink]="['/detailedMovie',comedy.id]">
+
+                                <div class="bg-danger myCard" *ngIf="comedyM">
+                                    <img src="https://image.tmdb.org/t/p/w500/{{comedy.poster_path}}"
+                                        alt="trendingcomedyIMG" class="img-fluid">
+
+
+                                    <div class="imgLayer d-flex flex-column justify-content-center">
+                                        <div class="m-2">
+                                            <div class="">
+                                                <h3 class="fw-bold text-center h5">{{comedy.original_title}}</h3>
+                                                <h3 class="fw-bold text-center h5">{{comedy.name}}</h3>
+                                            </div>
+
+                                            <div class="">
+                                                <div class="d-flex justify-content-center align-items-center my-2">
+                                                    <i class="fa-solid fa-star h3 text-warning"></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span
+                                                                class="fw-bold h5">{{comedy.vote_average|number:'1.1-1'}}</span>
+                                                            <span class="h6">/10</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div *ngIf="myMovieIds?.includes($any(comedy.id))">
+                                                <div
+                                                    class="d-flex justify-content-center align-items-center my-2 text-blue">
+                                                    <i class="fa-solid fa-star h3 "></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span><span class="fw-bold h5">
+                                                                    {{userRate[myMovieIds.indexOf(comedy.id)]}}
+                                                                </span><span class="h6">/10</span></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+    </div>
+</section>
+
+<section class="py-3">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-white fw-bold h5">Crime Movies:</h3>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let crime of crimeM">
+                    <ng-template carouselSlide>
+                        <div class="col-12 col-md-11 mb-4">
+                            <a [routerLink]="['/detailedMovie',crime.id]">
+
+                                <div class="bg-danger myCard" *ngIf="crimeM">
+                                    <img src="https://image.tmdb.org/t/p/w500/{{crime.poster_path}}"
+                                        alt="trendingcrimeIMG" class="img-fluid">
+
+
+                                    <div class="imgLayer d-flex flex-column justify-content-center">
+                                        <div class="m-2">
+                                            <div class="">
+                                                <h3 class="fw-bold text-center h5">{{crime.original_title}}</h3>
+                                                <h3 class="fw-bold text-center h5">{{crime.name}}</h3>
+                                            </div>
+
+                                            <div class="">
+                                                <div class="d-flex justify-content-center align-items-center my-2">
+                                                    <i class="fa-solid fa-star h3 text-warning"></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span
+                                                                class="fw-bold h5">{{crime.vote_average|number:'1.1-1'}}</span>
+                                                            <span class="h6">/10</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div *ngIf="myMovieIds?.includes($any(crime.id))">
+                                                <div
+                                                    class="d-flex justify-content-center align-items-center my-2 text-blue">
+                                                    <i class="fa-solid fa-star h3 "></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span><span class="fw-bold h5">
+                                                                    {{userRate[myMovieIds.indexOf(crime.id)]}}
+                                                                </span><span class="h6">/10</span></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- <section class="py-3">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-white fw-bold h5">Documentary Movies:</h3>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let doc of docM">
+                    <ng-template carouselSlide>
+                        <div class="col-12 col-md-11 mb-4">
+                            <a [routerLink]="['/detailedMovie',doc.id]">
+
+                                <div class="bg-danger myCard" *ngIf="docM">
+                                    <img src="https://image.tmdb.org/t/p/w500/{{doc.poster_path}}" alt="trendingdocIMG"
+                                        class="img-fluid">
+
+
+                                    <div class="imgLayer d-flex flex-column justify-content-center">
+                                        <div class="m-2">
+                                            <div class="">
+                                                <h3 class="fw-bold text-center h5">{{doc.original_title}}</h3>
+                                                <h3 class="fw-bold text-center h5">{{doc.name}}</h3>
+                                            </div>
+
+                                            <div class="">
+                                                <div class="d-flex justify-content-center align-items-center my-2">
+                                                    <i class="fa-solid fa-star h3 text-warning"></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span
+                                                                class="fw-bold h5">{{doc.vote_average|number:'1.1-1'}}</span>
+                                                            <span class="h6">/10</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div *ngIf="myMovieIds?.includes($any(doc.id))">
+                                                <div
+                                                    class="d-flex justify-content-center align-items-center my-2 text-blue">
+                                                    <i class="fa-solid fa-star h3 "></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span><span class="fw-bold h5">
+                                                                    {{userRate[myMovieIds.indexOf(doc.id)]}}
+                                                                </span><span class="h6">/10</span></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+    </div>
+</section> -->
+
+
+
+
+<section class="py-3">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-white fw-bold h5">Romance Movies:</h3>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let romance of romanceM">
+                    <ng-template carouselSlide>
+                        <div class="col-12 col-md-11 mb-4">
+                            <a [routerLink]="['/detailedMovie',romance.id]">
+
+                                <div class="bg-danger myCard" *ngIf="romanceM">
+                                    <img src="https://image.tmdb.org/t/p/w500/{{romance.poster_path}}"
+                                        alt="trendingromanceIMG" class="img-fluid">
+
+
+                                    <div class="imgLayer d-flex flex-column justify-content-center">
+                                        <div class="m-2">
+                                            <div class="">
+                                                <h3 class="fw-bold text-center h5">{{romance.original_title}}</h3>
+                                                <h3 class="fw-bold text-center h5">{{romance.name}}</h3>
+                                            </div>
+
+                                            <div class="">
+                                                <div class="d-flex justify-content-center align-items-center my-2">
+                                                    <i class="fa-solid fa-star h3 text-warning"></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span
+                                                                class="fw-bold h5">{{romance.vote_average|number:'1.1-1'}}</span>
+                                                            <span class="h6">/10</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div *ngIf="myMovieIds?.includes($any(romance.id))">
+                                                <div
+                                                    class="d-flex justify-content-center align-items-center my-2 text-blue">
+                                                    <i class="fa-solid fa-star h3 "></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span><span class="fw-bold h5">
+                                                                    {{userRate[myMovieIds.indexOf(romance.id)]}}
+                                                                </span><span class="h6">/10</span></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="py-3">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-white fw-bold h5">Horror Movies:</h3>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let horror of horrorM">
+                    <ng-template carouselSlide>
+                        <div class="col-12 col-md-11 mb-4">
+                            <a [routerLink]="['/detailedMovie',horror.id]">
+
+                                <div class="bg-danger myCard" *ngIf="horrorM">
+                                    <img src="https://image.tmdb.org/t/p/w500/{{horror.poster_path}}"
+                                        alt="trendinghorrorIMG" class="img-fluid">
+
+
+                                    <div class="imgLayer d-flex flex-column justify-content-center">
+                                        <div class="m-2">
+                                            <div class="">
+                                                <h3 class="fw-bold text-center h5">{{horror.original_title}}</h3>
+                                                <h3 class="fw-bold text-center h5">{{horror.name}}</h3>
+                                            </div>
+
+                                            <div class="">
+                                                <div class="d-flex justify-content-center align-items-center my-2">
+                                                    <i class="fa-solid fa-star h3 text-warning"></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span
+                                                                class="fw-bold h5">{{horror.vote_average|number:'1.1-1'}}</span>
+                                                            <span class="h6">/10</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div *ngIf="myMovieIds?.includes($any(horror.id))">
+                                                <div
+                                                    class="d-flex justify-content-center align-items-center my-2 text-blue">
+                                                    <i class="fa-solid fa-star h3 "></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span><span class="fw-bold h5">
+                                                                    {{userRate[myMovieIds.indexOf(horror.id)]}}
+                                                                </span><span class="h6">/10</span></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-3">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-white fw-bold h5">Family Movies:</h3>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let family of familyM">
+                    <ng-template carouselSlide>
+                        <div class="col-12 col-md-11 mb-4">
+                            <a [routerLink]="['/detailedMovie',family.id]">
+
+                                <div class="bg-danger myCard" *ngIf="familyM">
+                                    <img src="https://image.tmdb.org/t/p/w500/{{family.poster_path}}"
+                                        alt="trendingfamilyIMG" class="img-fluid">
+
+
+                                    <div class="imgLayer d-flex flex-column justify-content-center">
+                                        <div class="m-2">
+                                            <div class="">
+                                                <h3 class="fw-bold text-center h5">{{family.original_title}}</h3>
+                                                <h3 class="fw-bold text-center h5">{{family.name}}</h3>
+                                            </div>
+
+                                            <div class="">
+                                                <div class="d-flex justify-content-center align-items-center my-2">
+                                                    <i class="fa-solid fa-star h3 text-warning"></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span
+                                                                class="fw-bold h5">{{family.vote_average|number:'1.1-1'}}</span>
+                                                            <span class="h6">/10</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div *ngIf="myMovieIds?.includes($any(family.id))">
+                                                <div
+                                                    class="d-flex justify-content-center align-items-center my-2 text-blue">
+                                                    <i class="fa-solid fa-star h3 "></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span><span class="fw-bold h5">
+                                                                    {{userRate[myMovieIds.indexOf(family.id)]}}
+                                                                </span><span class="h6">/10</span></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-3">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-white fw-bold h5">Drama Movies:</h3>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let drama of dramaM">
+                    <ng-template carouselSlide>
+                        <div class="col-12 col-md-11 mb-4">
+                            <a [routerLink]="['/detailedMovie',drama.id]">
+
+                                <div class="bg-danger myCard" *ngIf="dramaM">
+                                    <img src="https://image.tmdb.org/t/p/w500/{{drama.poster_path}}"
+                                        alt="trendingdramaIMG" class="img-fluid">
+
+
+                                    <div class="imgLayer d-flex flex-column justify-content-center">
+                                        <div class="m-2">
+                                            <div class="">
+                                                <h3 class="fw-bold text-center h5">{{drama.original_title}}</h3>
+                                                <h3 class="fw-bold text-center h5">{{drama.name}}</h3>
+                                            </div>
+
+                                            <div class="">
+                                                <div class="d-flex justify-content-center align-items-center my-2">
+                                                    <i class="fa-solid fa-star h3 text-warning"></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span
+                                                                class="fw-bold h5">{{drama.vote_average|number:'1.1-1'}}</span>
+                                                            <span class="h6">/10</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div *ngIf="myMovieIds?.includes($any(drama.id))">
+                                                <div
+                                                    class="d-flex justify-content-center align-items-center my-2 text-blue">
+                                                    <i class="fa-solid fa-star h3 "></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span><span class="fw-bold h5">
+                                                                    {{userRate[myMovieIds.indexOf(drama.id)]}}
+                                                                </span><span class="h6">/10</span></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+    </div>
+</section>
+
+<section class="py-3">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-white fw-bold h5">Sci-fi Movies:</h3>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let sciFi of sciFiM">
+                    <ng-template carouselSlide>
+                        <div class="col-12 col-md-11 mb-4">
+                            <a [routerLink]="['/detailedMovie',sciFi.id]">
+
+                                <div class="bg-danger myCard" *ngIf="sciFiM">
+                                    <img src="https://image.tmdb.org/t/p/w500/{{sciFi.poster_path}}"
+                                        alt="trendingsciFiIMG" class="img-fluid">
+
+
+                                    <div class="imgLayer d-flex flex-column justify-content-center">
+                                        <div class="m-2">
+                                            <div class="">
+                                                <h3 class="fw-bold text-center h5">{{sciFi.original_title}}</h3>
+                                                <h3 class="fw-bold text-center h5">{{sciFi.name}}</h3>
+                                            </div>
+
+                                            <div class="">
+                                                <div class="d-flex justify-content-center align-items-center my-2">
+                                                    <i class="fa-solid fa-star h3 text-warning"></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span
+                                                                class="fw-bold h5">{{sciFi.vote_average|number:'1.1-1'}}</span>
+                                                            <span class="h6">/10</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div *ngIf="myMovieIds?.includes($any(sciFi.id))">
+                                                <div
+                                                    class="d-flex justify-content-center align-items-center my-2 text-blue">
+                                                    <i class="fa-solid fa-star h3 "></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span><span class="fw-bold h5">
+                                                                    {{userRate[myMovieIds.indexOf(sciFi.id)]}}
+                                                                </span><span class="h6">/10</span></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-3">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-white fw-bold h5">Music Movies:</h3>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let music of musicM">
+                    <ng-template carouselSlide>
+                        <div class="col-12 col-md-11 mb-4">
+                            <a [routerLink]="['/detailedMovie',music.id]">
+
+                                <div class="bg-danger myCard" *ngIf="musicM">
+                                    <img src="https://image.tmdb.org/t/p/w500/{{music.poster_path}}"
+                                        alt="trendingmusicIMG" class="img-fluid">
+
+
+                                    <div class="imgLayer d-flex flex-column justify-content-center">
+                                        <div class="m-2">
+                                            <div class="">
+                                                <h3 class="fw-bold text-center h5">{{music.original_title}}</h3>
+                                                <h3 class="fw-bold text-center h5">{{music.name}}</h3>
+                                            </div>
+
+                                            <div class="">
+                                                <div class="d-flex justify-content-center align-items-center my-2">
+                                                    <i class="fa-solid fa-star h3 text-warning"></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span
+                                                                class="fw-bold h5">{{music.vote_average|number:'1.1-1'}}</span>
+                                                            <span class="h6">/10</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div *ngIf="myMovieIds?.includes($any(music.id))">
+                                                <div
+                                                    class="d-flex justify-content-center align-items-center my-2 text-blue">
+                                                    <i class="fa-solid fa-star h3 "></i>
+                                                    <div class="d-flex flex-column justify-content-end">
+                                                        <span>
+                                                            <span><span class="fw-bold h5">
+                                                                    {{userRate[myMovieIds.indexOf(music.id)]}}
+                                                                </span><span class="h6">/10</span></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+    </div>
+</section>

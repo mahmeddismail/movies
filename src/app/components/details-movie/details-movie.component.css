@@ -1,0 +1,94 @@
+section {
+    /* background: linear-gradient(to left, #C2B280 20%, 	#C4A484 50%); */
+    color: white;
+}
+
+img {
+    max-width: 100% !important;
+}
+
+/* .poster{
+    max-width: 100% !important;
+    max-height: 400px !important;
+
+} */
+
+.myRate:hover,
+.genres:hover {
+    background-color: #181818;
+    cursor: pointer;
+}
+
+.genres {
+    border: solid 1px white;
+    border-radius: 20px;
+    padding: 5px 20px;
+}
+
+
+
+
+
+.myAnchor{
+    color: white;
+    text-decoration: none;
+}
+
+
+@media (max-width: 768px) {
+
+    .myMainDiv,
+    .navbar-nav {
+        flex-direction: column !important;
+    }
+
+    .movieRating {
+        margin-top: 25px;
+        padding: 10px;
+
+    }
+
+    .movieTitle {
+        text-align: center;
+    }
+
+    .MovieDate {
+        margin-left: 30px;
+    }
+
+    .movieDesc {
+        width: 100% !important;
+    }
+
+}
+
+.rateThis {
+    font-size: 12px;
+}
+
+ngb-rating {
+    color: #5799ef !important;
+}
+
+.myStarIcon {
+    position: relative;
+}
+
+.myRateNum {
+    font-size: 24px !important;
+    color: white;
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.iconSize1 {
+    font-size: 70px;
+}
+
+.iconSize2 {
+    font-size: 90px;
+    transition: font-size 2s;
+}

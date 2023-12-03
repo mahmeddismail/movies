@@ -1,0 +1,45 @@
+/* 
+
+
+.movie-data{
+    position: absolute;
+    top:80%;
+    left:10%;
+    bottom:0;
+    right:0;
+} */
+
+.myBanner {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+
+@media (max-width: 768px) {
+  .carousel-caption{
+    position: absolute;
+    top: 40%;
+  }
+
+  .carousel-caption h1 {
+    font-size: 12px;
+  }
+  .carousel-caption p {
+    font-size: 10px;
+  }
+
+  .myRatedBanner i{
+    font-size: 10px;
+  }
+  .MaxNumRating{
+    font-size: 10px;
+  }
+  .userRatingBanner{
+    font-size: 12px;
+  }
+
+}

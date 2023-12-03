@@ -1,0 +1,165 @@
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row gy-4 mx-5" *ngIf="personCard">
+            <div class="d-flex justify-content-between align-items-center ">
+                <div>
+
+                    <h1 class="text-white fw-bold">{{personCard.name}}</h1>
+                    <span class="text-gray">{{personCard.known_for_department}}</span>
+                </div>
+                <div class="d-flex flex-column align-items-center  p-1 col-md-2 justify-content-center">
+                    <div class="fw-bold text-gray text-center py-2">
+
+                        <span class="text-uppercase h5">POPULARITY</span>
+                    </div>
+                    <div class="myRate px-3 py-2 d-flex ">
+                        <i class="fa-solid fa-fire h2 text-danger"></i>
+                        <span class="h4 mx-2">{{personCard.popularity| number:'1.0-0'}}</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row gap-2 ">
+                <div class="col-md-3">
+                    <img src="https://image.tmdb.org/t/p/original/{{personCard.profile_path}}" alt="DetailedMovieIMG"
+                        class="img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <div class="d-flex " *ngIf="personCard.place_of_birth!=null">
+                        <span class="text-white  h4 fw-bold">Place of Birth </span>
+                        <span class="h4 text-blue mx-2">{{personCard.place_of_birth}}</span>
+                    </div>
+                    <div class="d-flex " *ngIf="personCard.birthday!=null">
+                        <span class="text-white  h4 fw-bold">Born </span>
+                        <span class="text-blue mx-2 h4">{{personCard.birthday|date}}</span>
+                    </div>
+
+                    <div class="d-flex" *ngIf="personCard.deathday!=null">
+                        <span class="text-white  h4 fw-bold mx-2">Death </span>
+                        <span class="text-blue h4">{{personCard.deathday|date}}</span>
+                    </div>
+
+
+                    <div class="py-3">
+                        <p class="text-white ">{{personCard.biography}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="line"></div>
+</section>
+
+<section class="">
+    <div class="container">
+        <div class="row gy-4 mx-5">
+
+            <div class="" *ngIf="personCreditsMovies">
+                <span class="h2 fw-bold text-white  ">Known for Movies: </span>
+
+
+                <div class="row">
+                    <div class="col-md-4 py-4 cursor-pointer" *ngFor="let credits of personCreditsMovies|slice:0:countForMovies*6">
+                        <div class="myBoxBorder">
+
+                        <a [routerLink]="['/detailedMovie',credits.id]" class="text-decoration-none">
+                            <div class="row align-items-center">
+                                <div class="col-md-4" *ngIf="credits.poster_path!=null">
+                                    <img src="https://image.tmdb.org/t/p/original/{{credits.poster_path}}"
+                                        class="img-fluid" alt="">
+                                </div>
+                                <div class="col-md-8 d-flex flex-column ">
+                                    <h4 class="fw-bold text-white">{{credits.original_title|seeMore:4}}</h4>
+                                    <span class="text-gray">{{credits.character}}</span>
+                                    <span class="text-gray">{{credits.release_date|date:'yyyy'}}</span>
+
+
+                                    <div class="movieRating">
+                                        <div class="d-flex align-items-center ">
+                                            <div class="d-flex align-items-center">
+
+                                                <i class="fa-solid fa-star text-warning"></i>
+                                                <span
+                                                    class="fw-bold mx-1 text-gray">{{credits.vote_average|number:'1.1-1'}}</span>
+                                            </div>
+
+                                            <div class="mx-2 d-flex align-items-center"
+                                                *ngIf="myMovieIds?.includes($any(credits.id))">
+                                                <i class="fa-solid fa-star text-blue"></i>
+                                                <span class="fw-bold mx-1 text-gray">
+                                                    {{userRating[myMovieIds.indexOf(credits.id)]}}
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <a class="text-decoration-none text-blue h4 text-center cursor-pointer" (click)="countForMovies=countForMovies+1" *ngIf="countForMovies*6<personCreditsMovies.length">SeeMore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="">
+    <div class="container">
+        <div class="row gy-4 mx-5">
+
+            <div class="" *ngIf="personCreditsTv">
+                <span class="h2 fw-bold text-white  ">Known for Tv Shows: </span>
+
+
+                <div class="row">
+                    <div class="col-md-4 py-4 cursor-pointer" *ngFor="let credits of personCreditsTv|slice:0:countForTV*6">
+                        <div class="myBoxBorder">
+
+                        <a [routerLink]="['/detailedtv',credits.id]" class="text-decoration-none">
+                            <div class="row align-items-center">
+                                <div class="col-md-4" *ngIf="credits.poster_path!=null">
+                                    <img src="https://image.tmdb.org/t/p/original/{{credits.poster_path}}"
+                                        class="img-fluid" alt="">
+                                </div>
+                                <div class="col-md-8 d-flex flex-column ">
+                                    <h4 class="fw-bold text-white">{{credits.original_name|seeMore:4}}</h4>
+                                    <span class="text-gray">{{credits.character}}</span>
+                                    <span class="text-gray">{{credits.first_air_date|date:'yyyy'}}</span>
+
+
+                                    <div class="movieRating">
+                                        <div class="d-flex align-items-center ">
+                                            <div class="d-flex align-items-center">
+
+                                                <i class="fa-solid fa-star text-warning"></i>
+                                                <span
+                                                    class="fw-bold mx-1 text-gray">{{credits.vote_average|number:'1.1-1'}}</span>
+                                            </div>
+
+                                            <div class="mx-2 d-flex align-items-center"
+                                                *ngIf="myMovieIds?.includes($any(credits.id))">
+                                                <i class="fa-solid fa-star text-blue"></i>
+                                                <span class="fw-bold mx-1 text-gray">
+                                                    {{userRating[myMovieIds.indexOf(credits.id)]}}
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <a class="text-decoration-none text-blue h4 text-center cursor-pointer" (click)="countForTV=countForTV+1" *ngIf="countForTV*6<personCreditsTv.length">SeeMore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,309 @@
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row gy-4 mx-5">
+
+            <div class="py-5 " *ngIf="myMovie">
+                <div class="d-flex align-items-center justify-content-between myMainDiv">
+                    <div class="px-3 col-md-6">
+                        <h2 class=" fw-bold text-white movieTitle">{{myMovie.title}}</h2>
+                        <!-- <p class="text-gray" *ngIf="myMovie.status!='Released'">{{myMovie.tagline}}</p> -->
+                        <div class="d-flex MovieDate ">
+                            <div>
+                                <span class="text-gray">{{myMovie.release_date|date:"yyyy"}}</span>
+                                <span class="text-gray mx-4 ">{{myMovie.runtime}}m</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-2 d-flex flex-column movieRating" *ngIf="myMovie.status=='Released'">
+                        <div class="fw-bold text-gray text-center">
+                            <span class="text-uppercase h5">Rating</span>
+                        </div>
+                        <div class="d-flex align-items-center myRate px-2 py-1 justify-content-center">
+                            <i class="fa-solid fa-star h1 text-warning"></i>
+                            <div class="d-flex flex-column justify-content-end">
+                                <span><span class="fw-bold h4">{{myMovie.vote_average}}</span><span
+                                        class="h6">/10</span></span>
+                                <span class="h6">{{myMovie.vote_count}} Votes</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- 
+                    <div>
+                        <div>
+
+                            <div *ngIf="!myMovieIds.includes($any(myMovie.id))">
+                                <p>no</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div *ngIf="myMovieIds.includes($any(myMovie.id))">
+                                {{userRating[myMovieIds.indexOf(myMovie.id)] }}
+                            </div>
+                        </div>
+                    </div> -->
+
+
+
+                    <div class=" d-flex flex-column align-items-center col-md-2 justify-content-center"
+                        *ngIf="myMovie.status=='Released'">
+                        <div class="fw-bold text-gray text-center">
+
+                            <span class="text-uppercase h5">Your Rating</span>
+                        </div>
+
+                        <!-- Either One -->
+                        <div *ngIf="myRatedMovieIds?.includes($any(myMovie.id)) && !btnLoading"
+                            class="myRate text-blue px-3 py-2 d-flex" data-bs-toggle="modal" data-bs-target="#AddNote">
+                            <i class="fa-solid fa-star h2 "></i>
+                            <span><span class="fw-bold h4"> {{userRating[myRatedMovieIds.indexOf(myMovie.id)]}}
+                                </span><span class="h4">/10</span></span>
+                        </div>
+
+
+                        <div *ngIf="!myRatedMovieIds?.includes($any(myMovie.id)) && !btnLoading"
+                            class="myRate text-blue px-3 py-2 d-flex" data-bs-toggle="modal" data-bs-target="#AddNote">
+                            <i class="fa-regular fa-star h2"></i>
+                            <span class="h4 mx-2">Rate</span>
+                        </div>
+
+                        <div *ngIf="btnLoading" class="myRate text-blue px-3 py-2 d-flex" data-bs-toggle="modal"
+                            data-bs-target="#AddNote">
+                            <i class="fas fa-spinner fa-spin px-5 h2"></i>
+                        </div>
+
+                    </div>
+
+                    <form [formGroup]="myRate" (ngSubmit)="ratingMovie(myMovie.id,myRate)">
+                        <div class="modal fade" id="AddNote" tabindex="-1" aria-labelledby="AddNoteLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content bg-dark">
+                                    <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="text-center py-2 d-flex flex-column">
+                                        <i id="AddNoteLabel"
+                                            [class]="'modal-title fa-solid fa-star text-center text-blue myStarIcon' + (starRating == 0 ? ' iconSize1' : ' iconSize2')">
+
+                                            <span class="myRateNum">
+                                                {{starRating}}
+                                            </span>
+                                        </i>
+                                        <span class="text-warning fw-bold text-center text-uppercase py-2 rateThis">Rate
+                                            this</span>
+                                        <span
+                                            class="text-white fw-bold text-center text-uppercase py-2 h4">{{myMovie.title}}</span>
+                                    </div>
+                                    <div class="modal-body d-flex justify-content-center">
+                                        <ngb-rating [max]="10" [(rate)]="starRating" formControlName="value"
+                                            [readonly]="false" class="h1"></ngb-rating>
+                                    </div>
+
+                                    <div class="modal-footer d-flex justify-content-center">
+                                        <button type="submit"
+                                            [class]="starRating==0?'btn btn-secondary w-100':'btn btn-yellow w-100'"
+                                            data-bs-dismiss="modal" [disabled]="starRating==0">Rate</button>
+
+                                        <span *ngIf="myRatedMovieIds?.includes($any(myMovie.id))" type="submit"
+                                            class=" text-blue w-100 text-center py-2" data-bs-dismiss="modal"
+                                            (click)="deleteRatingMovies(myMovie.id)">Delete Rating</span>
+                                        <!-- <button type="button" class="btn btn-danger" -->
+                                        <!-- data-bs-dismiss="modal">Cancel</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="d-flex flex-column align-items-center  p-1 col-md-2 justify-content-center"
+                        *ngIf="myMovie.status=='Released'">
+                        <div class="fw-bold text-gray text-center py-2">
+
+                            <span class="text-uppercase h5">POPULARITY</span>
+                        </div>
+                        <div class="myRate px-3 py-2 d-flex ">
+                            <i class="fa-solid fa-fire h2 text-danger"></i>
+                            <span class="h4 mx-2">{{myMovie.popularity| number:'1.0-0'}}</span>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="d-flex align-items-center myRate p-2 col-md-2" *ngIf="myMovie.status!='Released'">
+                            <span>Status <span class="text-blue">{{myMovie.status}}</span></span>
+                        </div> -->
+
+                </div>
+                <!-- <img *ngIf="myMovie.belongs_to_collection!=null"
+                    src="https://image.tmdb.org/t/p/original/{{myMovie.belongs_to_collection.backdrop_path}}"
+                    alt="trendingMoviesIMG"> -->
+                <div class="d-flex">
+                    <img *ngIf="myMovie.backdrop_path!=null"
+                        src="https://image.tmdb.org/t/p/original/{{myMovie.backdrop_path}}" alt="DetailedMovieIMG"
+                        class="img-fluid w-50 h-50">
+                    <div class="myIFrame">
+                        <iframe [src]='embdedURL' width="650" height="325" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="line"></div>
+
+                <div class="">
+                    <div class="m-2">
+                        <div class="py-2 d-flex w-25">
+                            <button class="btn btn-red text-white p-2 flex-fill"
+                                *ngIf="!myWatchListMovieIds?.includes($any(myMovie.id)) && !btnLoading"
+                                (click)="addToUserWatchList()">
+                                <div class="d-flex align-items-center justify-content-center ">
+                                    <i class="fa-solid fa-plus"></i>
+                                    <span class="mx-2">Add To WatchList</span>
+                                </div>
+                            </button>
+
+                            <button class="btn btn-red text-white p-2 flex-fill"
+                                *ngIf="myWatchListMovieIds?.includes($any(myMovie.id)) && !btnLoading"
+                                (click)="deleteUserWatchList()">
+                                <div class="d-flex align-items-center justify-content-center ">
+                                    <i class="fa-solid fa-check"></i>
+                                    <span class="mx-2">In WatchList</span>
+                                </div>
+                            </button>
+
+                            <button class="btn btn-red text-white flex-fill" *ngIf="btnLoading">
+                                <div class="d-flex align-items-center justify-content-center ">
+                                    <i class="fas fa-spinner fa-spin px-5"></i>
+                                </div>
+                            </button>
+                        </div>
+
+                        <div class="line"></div>
+                        <ul class="navbar-nav  d-flex flex-row py-2">
+                            <li *ngFor="let item of myMovie.genres " class="mx-1 genres text-center ">{{item.name}}
+                            </li>
+                        </ul>
+                        <div class="line"></div>
+
+                        <p class="py-2 w-75 movieDesc">{{myMovie.overview}}</p>
+                        <div class="line"></div>
+                        <div class="py-2">
+                            <span>Production Companies </span>
+                            <span *ngFor="let companies of myMovie.production_companies"> <span class="text-blue">
+                                    {{companies.name}}</span><span class="text-center"> . </span> </span>
+                        </div>
+                        <div class="line"></div>
+                        <div class="py-2">
+                            <span>Production Countries </span>
+                            <span *ngFor="let companies of myMovie.production_countries"> <span class="text-blue">
+                                    {{companies.name}}</span><span class="text-center"> . </span> </span>
+                        </div>
+                        <div class="line"></div>
+                        <div class="py-2 d-flex flex-column" *ngIf="myMovie.status=='Released'">
+                            <span>Budget <span class="text-blue">{{myMovie.budget|currency}}</span></span>
+                            <span class="py-2">Revenue <span
+                                    class="text-blue">{{myMovie.revenue|currency}}</span></span>
+                        </div>
+                        <div class="line"></div>
+
+                        <div class="py-2">
+
+                            <span>Original Language <span class="text-blue">{{myMovie.original_language}}</span></span>
+
+                        </div>
+                        <div class="line"></div>
+
+                        <div class="py-2">
+                            <button class="btn btn-blue">
+                                <!-- <a href="https://www.missionimpossible.com"
+                                    target="_blank" type="submit"></a> -->
+
+                                <a href="{{myMovie.homepage}}" class="myAnchor" target="_blank">
+
+                                    Movie HomePage
+                                </a>
+                            </button>
+
+
+                        </div>
+
+                        <!-- *ngIf="!myLatestWishListIds.includes($any(product.id)) -->
+
+
+                        <div class="line"></div>
+
+
+                        <div class="cast">
+                            <span class="h2 fw-bold py-2">Cast: </span>
+
+
+                            <div class="row">
+                                <div class="col-md-4 py-4 cursor-pointer"
+                                    *ngFor="let cast of movieCast|slice:0:count*9">
+                                    <div class="myBoxBorder">
+
+                                        <a [routerLink]="['/credits',cast.id]" class="myAnchor">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-3" *ngIf="cast.profile_path!=null">
+                                                    <img src="https://image.tmdb.org/t/p/original/{{cast.profile_path}}"
+                                                        class="" alt="actorPic">
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <h4 class="fw-bold">{{cast.name|seeMore:2}}</h4>
+                                                    <span class="text-gray">{{cast.character}}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <a class="text-decoration-none h4 text-center cursor-pointer text-blue"
+                                    (click)="count=count+1" *ngIf="count*6<movieCast.length">SeeMore</a>
+                            </div>
+                        </div>
+                        <div class="line"></div>
+
+
+                        <div class="director">
+                            <span class="h2 fw-bold py-2">Director: </span>
+
+                            <div class="row">
+                                <div class="col-md-4 py-4 cursor-pointer">
+                                    <div class="myBoxBorder">
+
+                                        <a [routerLink]="['/credits',movieDirector.id]" class="myAnchor">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-3" *ngIf="movieDirector.profile_path!=null">
+                                                    <img src="https://image.tmdb.org/t/p/original/{{movieDirector.profile_path}}"
+                                                        class="" alt="actorPic">
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <h4 class="fw-bold ">{{movieDirector.name}}</h4>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="line"></div>
+                        <div class="py-2">
+                            <span *ngIf="movieWriters.length>1">Writers </span>
+                            <span *ngIf="movieWriters.length==1">Writer </span>
+                            <span *ngFor="let writers of movieWriters"> <span class="text-blue">
+                                    {{writers.name}}</span><span class="text-center"> . </span> </span>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

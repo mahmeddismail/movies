@@ -1,0 +1,77 @@
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row gy-4 mx-5">
+            <div class="d-flex justify-content-between align-items-center py-3">
+                <h1 class="text-white fw-bold h3">Your Watchlist:</h1>
+            </div>
+
+            <div class="row text-gray h1" *ngIf="myWatchList.length==0">
+                <div class="d-flex justify-content-center align-items-center vh-100">
+                    You haven't added any movies to your watchlist.
+                </div>
+            </div>
+            <div *ngFor=" let watchlist of myWatchList">
+                <!-- <a [routerLink]="['/detailedMovie',watchlist.id]" class="text-decoration-none"> -->
+
+                <div class="row myBoxBorder" *ngIf="watchlist">
+                    <div class="col-md-2">
+                        <div class="position-relative">
+                            <img src="https://image.tmdb.org/t/p/original/{{watchlist.poster_path}}"
+                                alt="DetailedMovieIMG" class="img-fluid" alt="watchlistPoster">
+                            <button class="myRibbon btn cursor-pointer" title="Click to remove from watchlist"
+                                (click)="deleteUserWatchList(watchlist.id)"
+                                *ngIf="myWatchListMovieIds?.includes($any(watchlist.id))">
+                                <i class="fa-solid fa-check"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                    <div class="col-md-10 text-white">
+
+                        <h1 class="h4 fw-bold ">{{watchlist.original_title}}</h1>
+
+                        <div class="d-flex align-items-center text-gray">
+                            <span>{{watchlist.release_date|date:"yyyy"}}</span>
+                        </div>
+
+
+                        <div class="py-1">
+
+                            <!-- <span>{{genresName[genresIds?.indexOf(movieGenre)]}}</span> -->
+
+                        </div>
+
+
+                        <div class="movieRating py-1">
+                            <div class="d-flex align-items-center ">
+                                <div class="d-flex align-items-center">
+
+                                    <i class="fa-solid fa-star text-warning"></i>
+                                    <span
+                                        class="fw-bold mx-1 text-gray">{{watchlist.vote_average|number:'1.1-1'}}</span>
+                                </div>
+
+                                <div class="mx-2 d-flex align-items-center"
+                                    *ngIf="myRatedMoviesIds?.includes($any(watchlist.id))">
+                                    <i class="fa-solid fa-star text-blue"></i>
+                                    <span class="fw-bold mx-1 text-gray">
+                                        {{userRating[myRatedMoviesIds.indexOf(watchlist.id)]}}
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="myOverView w-50 py-1">
+                            <p>{{watchlist.overview}}</p>
+                        </div>
+                    </div>
+                </div>
+
+             
+                <!-- </a> -->
+
+            </div>
+        </div>
+    </div>
+</section>

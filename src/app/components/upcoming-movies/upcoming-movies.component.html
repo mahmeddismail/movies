@@ -1,0 +1,44 @@
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row gy-4">
+            <h2 class=" fw-bold text-white">Upcoming Movies:</h2>
+
+            <div class="col-md-4" *ngFor="let movies of myUpComingMovies">
+                <a [routerLink]="['/detailedMovie',movies.id]">
+
+                    <div class="bg-danger myCard" *ngIf="movies.release_date">
+                        <img src="https://image.tmdb.org/t/p/original/{{movies.poster_path}}" alt="UpComingMoviesIMG"
+                            class="img-fluid">
+                        <div class="imgLayer">
+                            <div class="m-2">
+                                <div class="">
+
+                                    <h3 class="fw-bold text-center">{{movies.original_title}}</h3>
+                                    <p class="my-2">{{movies.overview|seeMore:25}}</p>
+
+                                </div>
+                                <div class="d-flex flex-column my-3">
+                                    <span><span class="fw-bold">Release Date: </span>
+                                        <span>{{movies.release_date}}</span></span>
+                                    <div class="d-flex  align-items-center my-2">
+                                        <i class="fa-solid fa-star h1 text-warning"></i>
+                                        <div class="d-flex flex-column justify-content-end">
+                                            <span><span class="fw-bold h3">{{movies.vote_average}}</span><span
+                                                    class="h5">/10</span></span>
+                                            <span class="h6">{{movies.vote_count}} Votes</span>
+
+                                        </div>
+
+                                    </div>
+                                    <span><span class="fw-bold">Original Language: </span>
+                                        <span>{{movies.original_language}}</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans&display=swap');
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+
+
+body {
+  font-family: 'Playpen Sans', cursive;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0.5)), url(assets/images/288727.jpg);
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* background-image: url(assets/images/288727.jpg); */
+  background-size: cover;
+  /* color: white; */
+}
+
+.line {
+  border-bottom: 1px solid #505050;
+}
+
+.text-lightWhite {
+  color: #dddddd;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.btn-red {
+  background-color: #E50914;
+}
+
+.btn-red:hover {
+  background-color: #ff0915;
+}
+
+.text-red {
+  color: #E50914;
+}
+
+.text-blue {
+  color: #5799ef;
+}
+
+.bg-dark {
+  background-color: #181818;
+}
+
+.btn-blue {
+  background-color: royalblue;
+  border: solid royalblue;
+}
+
+.btn-yellow {
+  background-color: #FFD800;
+  border: solid #FFD800;
+  color: #181818;
+}
+
+.btn-blue:hover {
+  background-color: rgb(30, 30, 188);
+  border: solid rgb(30, 30, 188);
+}
+
+.btn-yellow:hover {
+  background-color: rgb(219, 187, 8);
+  border: solid rgb(219, 187, 8);
+}
+
+.text-gray {
+  color: #888888
+}
+
+/* =============================================================== */
+.myCard {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+}
+
+.myCard img {
+  transition: transform 1s;
+
+}
+
+.imgLayer {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6223);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  transition: top 1s;
+}
+
+.myCard:hover .imgLayer {
+  top: 0%;
+}
+
+.myCard:hover img {
+  transform: scale(1.25);
+  /* transition: transform 1s; */
+}
+
+
+/******************************** HOME navText ****************************/
+
+
+.owl-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.owl-prev,
+.owl-next {
+  opacity: 0.4;
+  background-color: transparent !important;
+  border: none !important;
+  font-size: 24px;
+  cursor: pointer;
+  /* color: #fff; */
+  padding: 10px 20px !important;
+  border-radius: 5px;
+  transition: opacity 1s;
+}
+
+.owl-prev i::before,
+.owl-next i::before {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: '\f053';
+}
+
+.owl-next i::before {
+  content: '\f054';
+}
+
+/* Hover effect for navigation arrows */
+.owl-prev:hover,
+.owl-next:hover {
+  background-color: rgba(0, 0, 0, 0.633) !important;
+  opacity: 1 !important;
+}
+
+/* ************************************************************ */
+
+.positionedIcon {
+  position: fixed;
+  top: 88%;
+  left: 90%;
+  right: 0%;
+  bottom: 0%;
+  z-index: 9999;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.positionedIcon button:hover {
+  text-decoration: none;
+}
+
+.myBoxBorder {
+  border: 1px solid rgba(111, 110, 110, 0.54);
+  transition: background-color .25s;
+}
+
+.myBoxBorder:hover {
+  background-color: #181818;
+  /* box-shadow:5px 5px #181818; */
+}
+
+.myBoxBorder:hover h4 {
+  color: #5f5d5d !important
+}

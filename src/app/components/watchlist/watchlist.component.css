@@ -1,0 +1,21 @@
+.myRibbon{
+    height: 60px;
+    width: 38px;
+    border-radius: 20%;
+    /* wid */
+    position: absolute;
+    top: 0%;
+    /* bottom: 0; */
+    left: 0;
+    /* right: 0; */
+    background-color: #90EE90;
+}
+
+
+
+@media (max-width: 768px) {
+
+    .myOverView{
+        width: 100% !important;
+    }
+}
