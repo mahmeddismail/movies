@@ -51,15 +51,6 @@ export class HomeComponent implements OnInit {
   requestedToken: string = ''
 
 
-  vibrate() {
-    if ('vibrate' in navigator) {
-      navigator.vibrate(2000); // Vibrate for 200 milliseconds
-    } else {
-      console.log('Vibration API not supported');
-    }
-  }
-
-
 
   myRawBody = new FormGroup({
     redirect_to: new FormControl("http://www.localhost:4200"
