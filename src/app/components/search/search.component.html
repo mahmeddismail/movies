@@ -1,0 +1,41 @@
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row gy-4 mx-5">
+            <input type="text" class="form-control bg-dark text-white " placeholder="Search for a movie, tv or person"
+                aria-label="Movie Name" [(ngModel)]="searchingAbout" (ngModelChange)="searching()">
+        </div>
+
+        <div class="container  py-5">
+            <div class="row gy-4 mx-5">
+                <div class="col-md-4 cursor-pointer" *ngFor="let search of searchArray">
+                    <div class="myBoxBorder">
+                        <a [routerLink]="search.media_type=='movie'?['/detailedMovie',search.id]
+                        :search.media_type=='tv'?['/detailedtv',search.id]
+                        :search.media_type=='person'?['/credits',search.id]
+                        :['/notfound']" class="text-decoration-none">
+                            <div class="">
+                                <div *ngIf="search.poster_path">
+                                    <img src="https://image.tmdb.org/t/p/original/{{search.poster_path}}"
+                                        class="img-fluid" [alt]="search.title"
+                                        style="object-fit:cover;max-height: 100vh;">
+                                </div>
+
+                                <div *ngIf="search.profile_path">
+
+                                    <img src="https://image.tmdb.org/t/p/original/{{search.profile_path}}"
+                                        class="img-fluid" [alt]="search.name"
+                                        style="object-fit:cover;max-height: 100vh;">
+                                </div>
+
+                                <div class="p-3 text-white">
+                                    <h4 *ngIf="search.title">{{search.title}}</h4>
+                                    <h4 *ngIf="search.name">{{search.name}}</h4>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

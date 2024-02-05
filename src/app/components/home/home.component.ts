@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DetailedMovie } from 'src/app/interfaces/detailed-movie';
 import { Movies } from 'src/app/interfaces/movies';
-import { SeeMorePipe } from 'src/app/see-more.pipe';
 import { MoviesService } from 'src/app/services/movies.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AuthService } from 'src/app/services/auth.service';
@@ -34,8 +33,7 @@ export class HomeComponent implements OnInit {
     // console.log(authUrl);
   }
 
-
-
+ 
   myMovies: Movies[] = []
   actionM: Movies[] = []
   crimeM: Movies[] = []
@@ -75,7 +73,7 @@ export class HomeComponent implements OnInit {
 
   actionGenre() {
     this._MoviesService.moviesGenre(28).subscribe({
-      next: (res) => {
+    next: (res) => {
         this.actionM = res.results
 
 

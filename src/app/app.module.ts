@@ -22,7 +22,10 @@ import { TopRatedComponent } from './components/top-rated/top-rated.component';
 import { CastComponent } from './components/cast/cast.component';
 import { LoadingInterceptor } from './loading.interceptor';
 import { LoadingComponent } from './components/loading/loading.component';
-// import { WatchlistComponent } from './components/watchlist/watchlist.component';
+import { UserRatedComponent } from './components/user-rated/user-rated.component';
+import { searchComponent } from './components/search/search.component';
+import { WatchlistComponent } from './components/watchlist/watchlist.component';
+
 
 @NgModule({
   declarations: [
@@ -37,8 +40,13 @@ import { LoadingComponent } from './components/loading/loading.component';
     UpcomingMoviesComponent,
     DetailsMovieComponent,
     DetailesTvComponent,
-    TopRatedComponent, CastComponent, LoadingComponent
-    
+    TopRatedComponent,
+    CastComponent,
+    LoadingComponent,
+    UserRatedComponent,
+    searchComponent,
+    WatchlistComponent,
+
 
   ],
   imports: [

@@ -1,0 +1,9 @@
+.form-control::placeholder { 
+    color: gray;
+    opacity: 1; 
+}
+
+.myBoxBorder{
+    width: 100%;
+    height: 100%;
+}

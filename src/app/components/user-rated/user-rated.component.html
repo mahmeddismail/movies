@@ -1,0 +1,104 @@
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row gy-4 mx-5">
+            <div class="d-flex justify-content-between align-items-center py-3">
+                <h1 class="text-white fw-bold h3">Your Rated Movies:</h1>
+            </div>
+
+            <div class="row text-gray h1" *ngIf="Ratings.length==0">
+                <div class="d-flex justify-content-center align-items-center vh-100">
+                    You haven't rated any movies so far.
+                </div>
+            </div>
+            <div *ngFor="let rating of Ratings">
+                <div class="row myBoxBorder" *ngIf="rating">
+                    <div class="col-md-2">
+                        <a [routerLink]="['/detailedMovie',rating.id]" class="text-decoration-none">
+                            <div class="position-relative">
+                                <img src="https://image.tmdb.org/t/p/original/{{rating.poster_path}}"
+                                    alt="DetailedMovieIMG" class="img-fluid" alt="ratingPoster">
+                                <button class="myRibbon btn cursor-pointer" title="Click to remove from watchlist"
+                                    (click)="deleteRating(rating.id)">
+                                </button>
+
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-10 text-white">
+
+                        <h1 class="h4 fw-bold ">{{rating.original_title}}</h1>
+
+                        <div class="d-flex align-items-center text-gray">
+                            <span>{{rating.release_date|date:"yyyy"}}</span>
+                        </div>
+                        <div class="py-1">
+
+                            <!-- <span>{{genresName[genresIds?.indexOf(movieGenre)]}}</span> -->
+
+                        </div>
+
+                        <div class="py-1 cursor-pointer">
+                            <div class="d-flex align-items-center" [attr.data-bs-toggle]="'modal'"
+                                [attr.data-bs-target]="'#AddRating-' + rating.id">
+                                <div>
+                                    <i class="fa-solid fa-star text-blue"></i>
+                                    <span class="fw-bold mx-1 text-gray">{{rating.rating|number:'1.1-1'}}</span>
+                                </div>
+
+                                <!-- <div *ngIf="btnLoading" class="text-blue">
+                                    <i class="fas fa-spinner fa-spin h2"></i>
+                                </div> -->
+                            </div>
+
+                            <form [formGroup]="myRate" (ngSubmit)="ratingMovie(rating.id,myRate)">
+                                <div class="modal fade" [id]="'AddRating-' + rating.id" tabindex="-1"
+                                    aria-labelledby="AddRatingLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content bg-dark">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="text-center py-2 d-flex flex-column">
+                                                <i id="AddNoteLabel"
+                                                    [class]="'modal-title fa-solid fa-star text-center text-blue myStarIcon' + (starRating == 0 ? ' iconSize1' : ' iconSize2')">
+                                                    <span class="myRateNum">
+                                                        {{starRating}}
+                                                    </span>
+                                                </i>
+                                                <span
+                                                    class="text-warning fw-bold text-center text-uppercase py-2 rateThis">Edit
+                                                    Your Rating</span>
+                                                <span
+                                                    class="text-white fw-bold text-center text-uppercase py-2 h4">{{rating.title}}</span>
+                                            </div>
+                                            <div class="modal-body d-flex justify-content-center">
+                                                <ngb-rating [max]="10" [(rate)]="starRating" formControlName="value"
+                                                    [readonly]="false" class="h1"></ngb-rating>
+                                            </div>
+
+                                            <div class="modal-footer d-flex justify-content-center">
+                                                <button type="submit"
+                                                    [class]="starRating==0?'btn btn-secondary w-100':'btn btn-yellow w-100'"
+                                                    data-bs-dismiss="modal" [disabled]="starRating==0">Rate</button>
+
+                                                <span type="submit" class=" text-blue w-100 text-center py-2"
+                                                    data-bs-dismiss="modal" (click)="deleteRating(rating.id)">Delete
+                                                    Rating</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="myOverView w-50 py-1">
+                            <p>{{rating.overview|seeMore:40}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

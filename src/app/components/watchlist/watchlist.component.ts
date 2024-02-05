@@ -1,17 +1,17 @@
+// import { SeeMorePipe } from 'src/app/see-more.pipe';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MoviesService } from 'src/app/services/movies.service';
 import { Watchlist } from 'src/app/interfaces/watchlist';
 import { RouterModule } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { event } from 'jquery';
 
 @Component({
   selector: 'app-watchlist',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
   templateUrl: './watchlist.component.html',
   styleUrls: ['./watchlist.component.css']
 })
+
 export class WatchlistComponent implements OnInit {
 
   constructor(private _MoviesService: MoviesService) { }
@@ -28,9 +28,9 @@ export class WatchlistComponent implements OnInit {
   genresName: any;
   movieGenre: any;
   myWatchList: Watchlist[] = []
+  numberInWatchList:number=0;
   myRatedMoviesIds: any;
   userRating: any;
-
   deleteWatchList: any = {
     media_type: "movie",
     media_id: 0,
@@ -39,16 +39,19 @@ export class WatchlistComponent implements OnInit {
   btnLoading: boolean = false;
   myWatchListMovieIds: any;
 
+  removeWatchList: boolean = false;
 
+  sort:string='created_at.asc'
 
   getWatchlist() {
-    this._MoviesService.getWatchlistMovies().subscribe({
+    this._MoviesService.getWatchlistMovies(this.sort).subscribe({
       next: (res) => {
         this.myWatchList = res.results
+        this.numberInWatchList=res.total_results
         this.movieGenre = res.results.map((i: any) => i.genre_ids)
         this.myWatchListMovieIds = res.results.map((x: any) => x.id)
-        console.log(this.myWatchListMovieIds);
-        console.log(this.myWatchList);
+        // console.log(this.myWatchListMovieIds);
+        // console.log(this.myWatchList);
 
       },
       error: (err) => {
@@ -70,7 +73,7 @@ export class WatchlistComponent implements OnInit {
         //   });
         // });
         this.genresName = res.genres.filter((i: any) => i.id == 28)
-        console.log(this.genresName);
+        // console.log(this.genresName);
       },
       error: (err) => {
         console.log(err);
@@ -98,6 +101,7 @@ export class WatchlistComponent implements OnInit {
 
 
   deleteUserWatchList(movieId: number) {
+    this.removeWatchList = true;
     this.deleteWatchList.media_id = movieId
     this._MoviesService.watchlist(this.deleteWatchList).subscribe({
       next: (res) => {

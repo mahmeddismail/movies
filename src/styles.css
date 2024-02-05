@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playpen+Sans&display=swap');
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
-
-
 body {
   font-family: 'Playpen Sans', cursive;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0.5)), url(assets/images/288727.jpg);

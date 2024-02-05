@@ -1,0 +1,30 @@
+.rateThis {
+    font-size: 12px;
+}
+
+ngb-rating {
+    color: #5799ef !important;
+}
+
+.myStarIcon {
+    position: relative;
+}
+
+.myRateNum {
+    font-size: 24px !important;
+    color: white;
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.iconSize1 {
+    font-size: 70px;
+}
+
+.iconSize2 {
+    font-size: 90px;
+    transition: font-size 2s;
+}

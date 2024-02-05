@@ -1,16 +1,22 @@
 .myRibbon{
-    height: 60px;
-    width: 38px;
-    border-radius: 20%;
-    /* wid */
+    height: 50px;
+    width: 35px;
+    border-radius: 30%;
+    border-top-right-radius: 0%;
+    border-top-left-radius: 0%;
     position: absolute;
     top: 0%;
     /* bottom: 0; */
-    left: 0;
+    left: 2.5%;
     /* right: 0; */
     background-color: #90EE90;
+    transition: background-color 0.5s;
 }
 
+.myRibbon:hover{
+    background-color: #56ae56;
+
+}
 
 
 @media (max-width: 768px) {
@@ -18,4 +24,8 @@
     .myOverView{
         width: 100% !important;
     }
+}
+
+button{
+    z-index: 99999;
 }

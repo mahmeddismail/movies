@@ -1,30 +1,38 @@
-.myNav{
+.myNav {
     z-index: 999;
-    background-color:transparent ;
-    transition:background-color 1s ;
+    background-color: transparent;
+    transition: background-color 1s;
 }
-.myScrollNav{
+
+.myScrollNav {
     z-index: 999;
-    background-color:rgb(20, 20, 20) ;
-    transition:background-color 1s ;
+    background-color: rgb(20, 20, 20);
+    transition: background-color 1s;
 }
-.nav-link{
+
+.nav-link {
     transition: color 1s;
 }
-a:hover{
+
+a:hover {
     color: #E50914;
 
-} 
+}
 
-.dropdown-item{
+.dropdown-item {
     cursor: pointer;
     transition: background-color 1s;
 }
-.dropdown-item:hover{
+
+.dropdown-item:hover {
     background-color: darkgray;
 }
 
 
-.navbar-brand{
+.navbar-brand {
     font-size: 20px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
 }

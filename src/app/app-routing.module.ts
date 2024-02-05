@@ -9,6 +9,9 @@ import { DetailsMovieComponent } from './components/details-movie/details-movie.
 import { DetailesTvComponent } from './components/detailes-tv/detailes-tv.component';
 import { TopRatedComponent } from './components/top-rated/top-rated.component';
 import { CastComponent } from './components/cast/cast.component';
+import { UserRatedComponent } from './components/user-rated/user-rated.component';
+import { searchComponent } from './components/search/search.component';
+import { WatchlistComponent } from './components/watchlist/watchlist.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,8 +22,11 @@ const routes: Routes = [
   { path: 'detailedtv/:id', component: DetailesTvComponent },
   { path: 'series', component: SeriesComponent },
   { path: 'credits/:id', component: CastComponent },
-  // { path: 'watchlist', component: WatchlistComponent },
-  {path: 'watchlist', loadComponent: () => import('./components/watchlist/watchlist.component').then(mod => mod.WatchlistComponent)},
+  { path: 'userRating', component: UserRatedComponent},
+  { path: 'search', component: searchComponent},
+  { path: 'watchlist', component: WatchlistComponent },
+  // {path: 'watchlist', loadComponent: () => import('./components/watchlist/watchlist.component').then(mod => mod.WatchlistComponent)},
+  // {path: 'userRating', loadComponent: () => import('./components/user-rated/user-rated.component').then(mod => mod.UserRatedComponent)},
   { path: '**', component: NotfoundComponent },
 ];
 

@@ -228,7 +228,7 @@ export class DetailsMovieComponent implements OnInit {
   }
 
   getWatchlist() {
-    this._MoviesService.getWatchlistMovies().subscribe({
+    this._MoviesService.getWatchlistMovies('created_at.desc').subscribe({
       next: (res) => {
         this.myWatchListMovieIds = res.results.map((x: any) => x.id)
         console.log(this.myWatchListMovieIds);

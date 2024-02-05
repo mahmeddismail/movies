@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, retry } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -64,23 +64,30 @@ export class MoviesService {
   creditsMoviesPage(personId: number): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}/person/${personId}/movie_credits`, { headers: this.header })
   }
-  
+
   personInfo(personId: number): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}/person/${personId}`, { headers: this.header })
   }
 
-  /***********************************************************/ 
+  /***********************************************************/
 
-  watchlist(data:any):Observable<any>{
-    return this._HttpClient.post(`${this.baseURL}/account/20429809/watchlist`,data, { headers: this.header })
+  watchlist(data: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}/account/20429809/watchlist`, data, { headers: this.header })
   }
 
-  getWatchlistMovies():Observable<any>{
-    return this._HttpClient.get(`${this.baseURL}/account/20429809/watchlist/movies`, { headers: this.header })
-}
+  getWatchlistMovies(sorting:string): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}/account/20429809/watchlist/movies?sort_by=${sorting}`, { headers: this.header })
+  }
 
-/**********************/ 
-moviesGenres():Observable<any>{
-  return this._HttpClient.get(`${this.baseURL}/genre/movie/list`, { headers: this.header })
-}
+  /**********************/
+  moviesGenres(): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}/genre/movie/list`, { headers: this.header })
+  }
+
+
+  /****************************************************************************/
+
+ search(querySearch:string,type:string):Observable<any>{
+    return this._HttpClient.get(`${this.baseURL}/search/${type}?query=${querySearch}`,{ headers: this.header })
+  }
 }
