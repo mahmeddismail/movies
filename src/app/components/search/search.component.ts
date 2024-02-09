@@ -91,4 +91,8 @@ export class searchComponent {
     })
   }
 
+  emptySearching(){
+    this.searchingAbout=''
+  }
+
 }

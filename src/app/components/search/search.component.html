@@ -65,12 +65,12 @@
     <div class="position-absolute top-100 start-0 z-3"
         style="max-height: 600px; overflow-y: auto; background-color: black;" *ngIf="isSearchBarOpen">
         <ng-container *ngFor="let search of:selectedOption === 'movie'? movieSearch
-                                         :selectedOption === 'tv'? tvSearch
-                                         :selectedOption === 'person'? personSearch
-                                         :multiSearch" class="cursor-pointer">
-            <a [routerLink]="search.media_type=='movie'?['/detailedMovie',search.id]
-        :search.media_type=='tv'?['/detailedtv',search.id]
-        :search.media_type=='person'?['/credits',search.id]
+                                            :selectedOption === 'tv'? tvSearch
+                                            :selectedOption === 'person'? personSearch
+                                            :multiSearch" class="cursor-pointer">
+            <a [routerLink]="selectedOption === 'movie'||search.media_type=='movie'?['/detailedMovie',search.id]
+                            :selectedOption === 'tv'||search.media_type=='tv'?['/detailedtv',search.id]
+                            :selectedOption === 'person'||search.media_type=='person'?['/credits',search.id]
         :['/notfound']" class="text-decoration-none">
                 <div class="row bg-dark mx-2 myBoxBorder" *ngIf="search">
                     <div class="myImg">
