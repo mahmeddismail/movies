@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'series', component: SeriesComponent },
   { path: 'credits/:id', component: CastComponent },
   { path: 'userRating', component: UserRatedComponent},
-  { path: 'search', component: searchComponent},
+  // { path: 'search', component: searchComponent},
   { path: 'watchlist', component: WatchlistComponent },
   // {path: 'watchlist', loadComponent: () => import('./components/watchlist/watchlist.component').then(mod => mod.WatchlistComponent)},
   // {path: 'userRating', loadComponent: () => import('./components/user-rated/user-rated.component').then(mod => mod.UserRatedComponent)},
