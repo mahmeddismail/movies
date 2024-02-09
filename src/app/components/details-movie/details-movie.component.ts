@@ -73,8 +73,8 @@ export class DetailsMovieComponent implements OnInit {
     this._MoviesService.rateMovie(id, rating.value).subscribe({
       next: (res) => {
         console.log('Rating updated successfully');
-        console.log(rating.value);
         this.starRating = rating.value;
+        console.log(this.starRating);
         // console.log(res);
         setTimeout(() => {
           this.btnLoading = false;

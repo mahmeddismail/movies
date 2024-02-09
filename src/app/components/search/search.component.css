@@ -1,9 +1,27 @@
-.form-control::placeholder { 
-    color: gray;
-    opacity: 1; 
+.searchInput{
+  text-decoration: none;
+  width: 500px;
 }
 
-.myBoxBorder{
-    width: 100%;
-    height: 100%;
+.form-control::placeholder { 
+  color: gray;
+  opacity: 1; 
+  text-decoration: none;
+}
+
+.selectedOptions{
+  width:30%   
+}
+
+.myImg{
+  max-width:15%;
+}
+
+.myContent{
+  max-width:80%;
+
+}
+
+.searchTitle{
+  max-height: 70%;
 }

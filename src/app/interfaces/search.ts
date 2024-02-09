@@ -1,4 +1,4 @@
-export interface Search {
+export interface multiSearch {
 
     adult: boolean;
     backdrop_path?: null | string;
@@ -23,6 +23,7 @@ export interface Search {
     known_for_department?: string;
     known_for?: null | KnownFor[];
 }
+
 
 export enum MediaType {
     Movie = "movie",

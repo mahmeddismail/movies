@@ -1,41 +1,101 @@
-<section class="py-5">
-    <div class="container py-5">
-        <div class="row gy-4 mx-5">
-            <input type="text" class="form-control bg-dark text-white " placeholder="Search for a movie, tv or person"
-                aria-label="Movie Name" [(ngModel)]="searchingAbout" (ngModelChange)="searching()">
+<div class="cursor-pointer fw-bold position-relative">
+    <div class="d-flex align-items-center ">
+        <div class="selectedOptions">
+            <select class="form-select bg-dark text-white" [(ngModel)]="selectedOption">
+                <option value="multi">
+                    <i class="fa-solid fa-star h1 text-warning"></i>
+                    <span>All</span>
+                </option>
+
+                <option value="movie">
+                    <i class="fa-solid fa-star h1 text-warning"></i>
+
+                    <span>Movie</span>
+                </option>
+                <option value="tv">
+                    <i class="fa-solid fa-star h1 text-warning"></i>
+
+                    <span>Series</span>
+                </option>
+                <option value="person">
+                    <i class="fa-solid fa-star h1 text-warning"></i>
+
+                    <span>Celebs</span>
+                </option>
+            </select>
+
+            <!-- <ng-select class="form-select bg-dark text-white" [(ngModel)]="selectedOption">
+          <ng-option [value]="'multi'">
+             <i class="text-gray fa-solid fa-magnifying-glass"></i> 
+            <span>All</span>
+          </ng-option>
+          <ng-option [value]="'movie'">
+             <i class="text-gray fa-solid fa-film"></i> 
+            <span>Movie</span>
+          </ng-option>
+          <ng-option [value]="'tv'">
+             <i class="text-gray fa-solid fa-tv"></i> 
+            <span>Series</span>
+          </ng-option>
+          <ng-option [value]="'person'">
+             <i class="text-gray fa-solid fa-user-group"></i> 
+            <span>Celebs</span>
+          </ng-option>
+        </ng-select> -->
         </div>
 
-        <div class="container  py-5">
-            <div class="row gy-4 mx-5">
-                <div class="col-md-4 cursor-pointer" *ngFor="let search of searchArray">
-                    <div class="myBoxBorder">
-                        <a [routerLink]="search.media_type=='movie'?['/detailedMovie',search.id]
-                        :search.media_type=='tv'?['/detailedtv',search.id]
-                        :search.media_type=='person'?['/credits',search.id]
-                        :['/notfound']" class="text-decoration-none">
-                            <div class="">
-                                <div *ngIf="search.poster_path">
-                                    <img src="https://image.tmdb.org/t/p/original/{{search.poster_path}}"
-                                        class="img-fluid" [alt]="search.title"
-                                        style="object-fit:cover;max-height: 100vh;">
-                                </div>
+        <div>
+            <input *ngIf="selectedOption === 'multi'" type="text" class="form-control bg-dark text-white searchInput"
+                placeholder="Search for a movie, tv or person" aria-label="multi Name" [(ngModel)]="searchingAbout"
+                (ngModelChange)="searchingMulti()" (focus)="searchingMulti()">
 
-                                <div *ngIf="search.profile_path">
+            <input *ngIf="selectedOption === 'movie'" type="text" class="form-control bg-dark text-white searchInput"
+                placeholder="Search for a movie" aria-label="movie Name" [(ngModel)]="searchingAbout"
+                (ngModelChange)="searchingMovie()" (focus)="searchingMovie()">
 
-                                    <img src="https://image.tmdb.org/t/p/original/{{search.profile_path}}"
-                                        class="img-fluid" [alt]="search.name"
-                                        style="object-fit:cover;max-height: 100vh;">
-                                </div>
+            <input *ngIf="selectedOption === 'tv'" type="text" class="form-control bg-dark text-white searchInput"
+                placeholder="Search for a TV Show" aria-label="tv Name" [(ngModel)]="searchingAbout"
+                (ngModelChange)="searchingTv()" (focus)="searchingTv()">
 
-                                <div class="p-3 text-white">
-                                    <h4 *ngIf="search.title">{{search.title}}</h4>
-                                    <h4 *ngIf="search.name">{{search.name}}</h4>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <input *ngIf="selectedOption === 'person'" type="text" class="form-control bg-dark text-white searchInput"
+                placeholder="Search for a Celebrity" aria-label="Celebrity Name" [(ngModel)]="searchingAbout"
+                (ngModelChange)="searchingPerson()" (focus)="searchingPerson()">
         </div>
     </div>
-</section>
+    <div class="position-absolute top-100 start-0 z-3"
+        style="max-height: 600px; overflow-y: auto; background-color: black;" *ngIf="isSearchBarOpen">
+        <ng-container *ngFor="let search of:selectedOption === 'movie'? movieSearch
+                                         :selectedOption === 'tv'? tvSearch
+                                         :selectedOption === 'person'? personSearch
+                                         :multiSearch" class="cursor-pointer">
+            <a [routerLink]="search.media_type=='movie'?['/detailedMovie',search.id]
+        :search.media_type=='tv'?['/detailedtv',search.id]
+        :search.media_type=='person'?['/credits',search.id]
+        :['/notfound']" class="text-decoration-none">
+                <div class="row bg-dark mx-2 myBoxBorder" *ngIf="search">
+                    <div class="myImg">
+                        <div class="">
+                            <img *ngIf="search.poster_path"
+                                src="https://image.tmdb.org/t/p/original/{{search.poster_path}}" class="img-fluid w-100"
+                                [alt]="search.title" style="object-fit: cover; max-height: 100vh;">
+                            <img *ngIf="search.profile_path"
+                                src="https://image.tmdb.org/t/p/original/{{search.profile_path}}" alt="DetailedMovieIMG"
+                                class="img-fluid w-100" [alt]="search.id">
+                        </div>
+                    </div>
+                    <div class="myContent text-white">
+                        <div class="searchTitle">
+                            <h4 *ngIf="search.title">{{search.title}}</h4>
+                            <h4 *ngIf="search.name">{{search.name}}</h4>
+                        </div>
+                        <div class="d-flex align-items-center text-gray">
+                            <span *ngIf="search.release_date">Movie {{search.release_date|date:"yyyy"}}</span>
+                            <span *ngIf="search.first_air_date">Tv Show {{search.first_air_date|date:"yyyy"}}</span>
+                            <span class="" *ngIf="search.known_for_department">{{search.known_for_department}}</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </ng-container>
+    </div>
+</div>

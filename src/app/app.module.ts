@@ -25,6 +25,9 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { UserRatedComponent } from './components/user-rated/user-rated.component';
 import { searchComponent } from './components/search/search.component';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+// import { NgOptionModule } from '@ng-option/ng-option';
+
 
 
 @NgModule({
@@ -56,6 +59,7 @@ import { WatchlistComponent } from './components/watchlist/watchlist.component';
     , ReactiveFormsModule, NgbModule
     , BrowserAnimationsModule
     , RouterModule, CarouselModule
+    ,NgSelectModule
 
   ],
   providers: [{

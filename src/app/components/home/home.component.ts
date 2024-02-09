@@ -57,7 +57,8 @@ export class HomeComponent implements OnInit {
 
   userRate: [] = []
   myMovieIds: any;
-  myMoiveBaseURLImages: string = "https://image.tmdb.org/t/p/w500/"
+  BaseURLImagesW500: string = "https://image.tmdb.org/t/p/w500/"
+  BaseURLImagesOriginal: string = "https://image.tmdb.org/t/p/original/"
   trendyMovies() {
     this._MoviesService.trendingMovies().subscribe({
       next: (res) => {
@@ -227,7 +228,6 @@ export class HomeComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
-
       }
     })
   }
@@ -266,11 +266,9 @@ export class HomeComponent implements OnInit {
       next: (res) => { console.log(res) },
       error: (err) => {
         console.log(err);
-
       }
     }
     )
-
   }
 
 

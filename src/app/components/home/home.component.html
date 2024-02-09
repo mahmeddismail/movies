@@ -9,7 +9,7 @@
             <owl-carousel-o [options]="MainOptions">
                 <ng-template carouselSlide *ngFor="let movies of myMovies" class="position-relative">
 
-                    <img src="https://image.tmdb.org/t/p/original/{{movies.backdrop_path}}" class="img-fluid"
+                    <img src="{{BaseURLImagesOriginal}}{{movies.backdrop_path}}" class="img-fluid"
                         [alt]="movies.id" style="object-fit:cover;max-height: 100vh;">
                     <div class="myBanner">
                         <div class="carousel-caption text-center">
@@ -67,7 +67,7 @@
                                 [routerLink]="movies.media_type=='movie'?['/detailedMovie',movies.id]:['/detailedtv',movies.id]">
 
                                 <div class="bg-warning myCard" *ngIf="myMovies">
-                                    <img src="https://image.tmdb.org/t/p/w500/{{movies.poster_path}}"
+                                    <img src="{{BaseURLImagesW500}}{{movies.poster_path}}"
                                         alt="trendingMoviesIMG" class="img-fluid">
 
 
@@ -130,7 +130,7 @@
                             <a [routerLink]="['/detailedMovie',action.id]">
 
                                 <div class="bg-danger myCard" *ngIf="actionM">
-                                    <img src="https://image.tmdb.org/t/p/w500/{{action.poster_path}}"
+                                    <img src="{{BaseURLImagesW500}}{{action.poster_path}}"
                                         alt="trendingactionIMG" class="img-fluid">
 
 
@@ -191,7 +191,7 @@
                             <a [routerLink]="['/detailedMovie',animation.id]">
 
                                 <div class="bg-danger myCard" *ngIf="animationM">
-                                    <img src="https://image.tmdb.org/t/p/w500/{{animation.poster_path}}"
+                                    <img src="{{BaseURLImagesW500}}{{animation.poster_path}}"
                                         alt="trendinganimationIMG" class="img-fluid">
 
 
@@ -254,7 +254,7 @@
                             <a [routerLink]="['/detailedMovie',comedy.id]">
 
                                 <div class="bg-danger myCard" *ngIf="comedyM">
-                                    <img src="https://image.tmdb.org/t/p/w500/{{comedy.poster_path}}"
+                                    <img src="{{BaseURLImagesW500}}{{comedy.poster_path}}"
                                         alt="trendingcomedyIMG" class="img-fluid">
 
 
@@ -315,7 +315,7 @@
                             <a [routerLink]="['/detailedMovie',crime.id]">
 
                                 <div class="bg-danger myCard" *ngIf="crimeM">
-                                    <img src="https://image.tmdb.org/t/p/w500/{{crime.poster_path}}"
+                                    <img src="{{BaseURLImagesW500}}{{crime.poster_path}}"
                                         alt="trendingcrimeIMG" class="img-fluid">
 
 
@@ -378,7 +378,7 @@
                             <a [routerLink]="['/detailedMovie',doc.id]">
 
                                 <div class="bg-danger myCard" *ngIf="docM">
-                                    <img src="https://image.tmdb.org/t/p/w500/{{doc.poster_path}}" alt="trendingdocIMG"
+                                    <img src="{{BaseURLImagesW500}}{{doc.poster_path}}" alt="trendingdocIMG"
                                         class="img-fluid">
 
 
@@ -442,7 +442,7 @@
                             <a [routerLink]="['/detailedMovie',romance.id]">
 
                                 <div class="bg-danger myCard" *ngIf="romanceM">
-                                    <img src="https://image.tmdb.org/t/p/w500/{{romance.poster_path}}"
+                                    <img src="{{BaseURLImagesW500}}{{romance.poster_path}}"
                                         alt="trendingromanceIMG" class="img-fluid">
 
 
@@ -505,7 +505,7 @@
                             <a [routerLink]="['/detailedMovie',horror.id]">
 
                                 <div class="bg-danger myCard" *ngIf="horrorM">
-                                    <img src="https://image.tmdb.org/t/p/w500/{{horror.poster_path}}"
+                                    <img src="{{BaseURLImagesW500}}{{horror.poster_path}}"
                                         alt="trendinghorrorIMG" class="img-fluid">
 
 
@@ -568,7 +568,7 @@
                             <a [routerLink]="['/detailedMovie',family.id]">
 
                                 <div class="bg-danger myCard" *ngIf="familyM">
-                                    <img src="https://image.tmdb.org/t/p/w500/{{family.poster_path}}"
+                                    <img src="{{BaseURLImagesW500}}{{family.poster_path}}"
                                         alt="trendingfamilyIMG" class="img-fluid">
 
 
@@ -632,7 +632,7 @@
                             <a [routerLink]="['/detailedMovie',drama.id]">
 
                                 <div class="bg-danger myCard" *ngIf="dramaM">
-                                    <img src="https://image.tmdb.org/t/p/w500/{{drama.poster_path}}"
+                                    <img src="{{BaseURLImagesW500}}{{drama.poster_path}}"
                                         alt="trendingdramaIMG" class="img-fluid">
 
 
@@ -695,7 +695,7 @@
                             <a [routerLink]="['/detailedMovie',sciFi.id]">
 
                                 <div class="bg-danger myCard" *ngIf="sciFiM">
-                                    <img src="https://image.tmdb.org/t/p/w500/{{sciFi.poster_path}}"
+                                    <img src="{{BaseURLImagesW500}}{{sciFi.poster_path}}"
                                         alt="trendingsciFiIMG" class="img-fluid">
 
 
@@ -758,7 +758,7 @@
                             <a [routerLink]="['/detailedMovie',music.id]">
 
                                 <div class="bg-danger myCard" *ngIf="musicM">
-                                    <img src="https://image.tmdb.org/t/p/w500/{{music.poster_path}}"
+                                    <img src="{{BaseURLImagesW500}}{{music.poster_path}}"
                                         alt="trendingmusicIMG" class="img-fluid">
 
 
