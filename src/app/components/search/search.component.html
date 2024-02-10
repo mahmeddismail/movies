@@ -76,10 +76,10 @@
                     <div class="myImg">
                         <div class="">
                             <img *ngIf="search.poster_path"
-                                src="https://image.tmdb.org/t/p/original/{{search.poster_path}}" class="img-fluid w-100"
+                                src="https://image.tmdb.org/t/p/w500/{{search.poster_path}}" class="img-fluid w-100"
                                 [alt]="search.title" style="object-fit: cover; max-height: 100vh;">
                             <img *ngIf="search.profile_path"
-                                src="https://image.tmdb.org/t/p/original/{{search.profile_path}}" alt="DetailedMovieIMG"
+                                src="https://image.tmdb.org/t/p/w500/{{search.profile_path}}" alt="DetailedMovieIMG"
                                 class="img-fluid w-100" [alt]="search.id">
                         </div>
                     </div>
