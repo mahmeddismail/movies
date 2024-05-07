@@ -5,7 +5,6 @@
 
             <div class="col-md-4" *ngFor="let movies of topRatedM">
                 <a [routerLink]="['/detailedMovie',movies.id]">
-
                     <div class="bg-danger myCard" *ngIf="movies.release_date">
                         <img src="https://image.tmdb.org/t/p/original/{{movies.poster_path}}" alt="UpComingMoviesIMG"
                             class="img-fluid">

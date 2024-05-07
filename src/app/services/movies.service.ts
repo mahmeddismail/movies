@@ -42,10 +42,44 @@ export class MoviesService {
   getDetailesMovie(movieId: number): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}/movie/${movieId}`, { headers: this.header })
   }
+
+  // *********************************************** TV **********************************//
   getDetailesTv(tvId: number): Observable<any> {
     return this._HttpClient.get(`${this.baseURL}/tv/${tvId}`, { headers: this.header })
   }
 
+  rateTv(tvId: number, rate: object): Observable<any> {
+    return this._HttpClient.post(`${this.baseURL}/tv/${tvId}/rating`, rate, { headers: this.header })
+  }
+
+  getRatedTv(): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}/account/20429809/rated/tv`, { headers: this.header })
+  }
+
+  deleteRatedTV(tvId: number): Observable<any> {
+    return this._HttpClient.delete(`${this.baseURL}/tv/${tvId}/rating`, { headers: this.header })
+  }
+  castInDetailsTV(movieId: number): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}/tv/${movieId}/credits`, { headers: this.header })
+  }
+
+  getWatchlistTv(sorting:string): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}/account/20429809/watchlist/tv?sort_by=${sorting}`, { headers: this.header })
+  }
+
+  tvTrailer(id: number): Observable<any> {
+    return this._HttpClient.get(`${this.baseURL}/tv/${id}/videos`, { headers: this.header })
+  }
+
+  // ***************************************
+  // ***************************************
+  // ***************************************
+  // ***************************************
+  // ***************************************
+  // ***************************************
+  // ***************************************
+  // ***************************************
+  // ***************************************
 
   //************************************************/ 
   topRated(): Observable<any> {

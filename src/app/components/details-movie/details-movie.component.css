@@ -29,7 +29,7 @@ img {
 
 
 
-.myAnchor{
+.myAnchor {
     color: white;
     text-decoration: none;
 }
@@ -91,4 +91,50 @@ ngb-rating {
 .iconSize2 {
     font-size: 90px;
     transition: font-size 2s;
+}
+
+.myBoxBorder {
+    width: 100%;
+    height: 100%;
+}
+
+/* .myIFrame {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%;
+}
+
+.myIFrame iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 650px;
+    height: 325px;
+} */
+
+
+.videoWrapper{
+    max-width: 950px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.videoContainer{
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.videoContainer iframe
+.videoContainer object,
+.videoContainer embed{
+    position: absolute;
+    top: 0;
 }

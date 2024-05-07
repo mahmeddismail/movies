@@ -146,8 +146,10 @@
                     <img *ngIf="myMovie.backdrop_path!=null"
                         src="https://image.tmdb.org/t/p/original/{{myMovie.backdrop_path}}" [alt]="myMovie.title"
                         class="img-fluid w-50 h-50">
-                    <div class="myIFrame">
-                        <iframe [src]='embdedURL' width="650" height="325" frameborder="0" allowfullscreen></iframe>
+                    <div class="videoWrapper">
+                        <div class="videoContainer">
+                            <iframe [src]='embdedURL'  width="650" height="325" frameborder="0" allowfullscreen></iframe>
+                        </div>
                     </div>
                 </div>
                 <div class="line"></div>

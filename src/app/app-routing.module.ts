@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { MoviesComponent } from './components/movies/movies.component';
 import { SeriesComponent } from './components/series/series.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { UpcomingMoviesComponent } from './components/upcoming-movies/upcoming-movies.component';
@@ -23,7 +22,7 @@ const routes: Routes = [
   { path: 'series', component: SeriesComponent },
   { path: 'credits/:id', component: CastComponent },
   { path: 'userRating', component: UserRatedComponent},
-  // { path: 'search', component: searchComponent},
+  { path: 'mySearching', component: searchComponent},
   { path: 'watchlist', component: WatchlistComponent },
   // {path: 'watchlist', loadComponent: () => import('./components/watchlist/watchlist.component').then(mod => mod.WatchlistComponent)},
   // {path: 'userRating', loadComponent: () => import('./components/user-rated/user-rated.component').then(mod => mod.UserRatedComponent)},

@@ -71,13 +71,13 @@
             <a [routerLink]="selectedOption === 'movie'||search.media_type=='movie'?['/detailedMovie',search.id]
                             :selectedOption === 'tv'||search.media_type=='tv'?['/detailedtv',search.id]
                             :selectedOption === 'person'||search.media_type=='person'?['/credits',search.id]
-        :['/notfound']" class="text-decoration-none">
+        :['/notfound']" class="text-decoration-none" (click)="searchingAbout='';">
                 <div class="row bg-dark mx-2 myBoxBorder" *ngIf="search">
                     <div class="myImg">
                         <div class="">
-                            <img *ngIf="search.poster_path"
-                                src="https://image.tmdb.org/t/p/w500/{{search.poster_path}}" class="img-fluid w-100"
-                                [alt]="search.title" style="object-fit: cover; max-height: 100vh;">
+                            <img *ngIf="search.poster_path" src="https://image.tmdb.org/t/p/w500/{{search.poster_path}}"
+                                class="img-fluid w-100" [alt]="search.title"
+                                style="object-fit: cover; max-height: 100vh;">
                             <img *ngIf="search.profile_path"
                                 src="https://image.tmdb.org/t/p/w500/{{search.profile_path}}" alt="DetailedMovieIMG"
                                 class="img-fluid w-100" [alt]="search.id">
